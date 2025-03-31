@@ -36,11 +36,9 @@
 
             <div class="mb-3">
                 <label class="form-label">Current Image:</label>
-                @if($product->image)
-                    <div>
-                        <img src="{{ asset('storage/' . $product->image) }}" class="img-thumbnail" width="100">
-                    </div>
-                @endif
+                <div>
+                    <img src="{{ asset('storage/' . $product->image) }}" class="img-thumbnail" width="100">
+                </div>
             </div>
 
             <div class="mb-3">

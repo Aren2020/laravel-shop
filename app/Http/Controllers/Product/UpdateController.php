@@ -2,30 +2,20 @@
 
 namespace App\Http\Controllers\Product;
 
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\UpdateRequest;
-use App\Models\Product;
-use Illuminate\Support\Facades\Storage;
+use App\Repositories\Write\ProductWriteRepository;
+use App\Services\ProductService;
+use Illuminate\Http\RedirectResponse;
 
 class UpdateController extends Controller
 {
-    public function __invoke(UpdateRequest $request, $slug)
+    public function __invoke(UpdateRequest $request, $slug, ProductService $service, ProductWriteRepository $repository): RedirectResponse
     {
         $data = $request->validated();
-        $product = Product::where('slug', $slug)->firstOrFail();
 
-        if ($request->hasFile('image')) {
-            // Delete old image
-            if ($product->image) {
-                Storage::delete('public/' . $product->image);
-            }
-
-            // Store new image
-            $data['image'] = $request->file('image')->store('products', 'public');
-        }
-
-        $product->update($data);
-        $product->fresh();
+        $product = $service->updateProduct($request, $slug, $data, $repository);
 
         return redirect(route('product.show', $product->slug));
     }

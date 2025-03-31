@@ -23,6 +23,9 @@ class FilterRequest extends FormRequest
     {
         return [
             'category_id' => 'exists:categories,id',
+            'user_id' => 'exists:users,id',
+            'name' => 'string',
+            'order_by' => 'array',
         ];
     }
 }

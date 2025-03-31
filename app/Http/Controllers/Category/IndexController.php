@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Http\Resources\CategoryResource;
+use App\Services\CategoryService;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class IndexController extends Controller
 {
-    public function __invoke()
+    public function __invoke(CategoryService $service): ResourceCollection
     {
-        $categories = Category::paginate(6);
-        return view('category.index', ['categories' => $categories]);
+        $categories = $service->getCategories();
+
+        return CategoryResource::collection($categories);
     }
 }

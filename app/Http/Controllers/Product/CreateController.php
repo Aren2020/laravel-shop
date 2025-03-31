@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Product;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Product;
+use Illuminate\View\View;
+use App\Http\Controllers\Controller;
 
 class CreateController extends Controller
 {
-    public function __invoke()
+    public function __invoke(): View
     {
         $categories = Category::all();
 

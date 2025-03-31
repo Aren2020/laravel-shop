@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Product;
+use App\Http\Resources\ProductResource;
+use App\Repositories\Read\ProductReadRepository;
+use App\Services\ProductService;
+use Illuminate\View\View;
 
 class ShowController extends Controller
 {
-    public function __invoke($slug)
+    public function __invoke($slug, ProductReadRepository $repository, ProductService $service): ProductResource
     {
-        $product = Product::where('slug', $slug)->firstOrFail();
+        $product = $service->getProduct($slug, $repository);
 
-        return view('product.show', ['product' => $product]);
+        return ProductResource::make($product);
     }
 }

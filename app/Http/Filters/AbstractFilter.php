@@ -15,9 +15,8 @@ abstract class AbstractFilter implements FilterInterface
 
     abstract protected function getCallBacks(): array;
 
-    public function apply(Builder $builder){
-//        $this->before($builder);
-
+    public function apply(Builder $builder): void
+    {
         foreach ($this->getCallBacks() as $name => $callback){
             if (isset($this->queryParams[$name])){
                 call_user_func($callback, $builder, $this->queryParams[$name]);

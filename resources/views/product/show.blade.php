@@ -8,7 +8,7 @@
             <h2 class="mb-3">{{ $product->name }}</h2>
 
             <div class="text-center mb-3">
-                <img src="{{ isset($product->image) ? asset('storage/' . $product->image) : asset('storage/no-image.jpg') }}"
+                <img src="{{ asset('storage/' . $product->image) }}"
                      class="img-fluid" alt="{{ $product->name }}" width="200">
             </div>
 

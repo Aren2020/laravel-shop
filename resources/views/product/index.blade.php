@@ -20,7 +20,9 @@
                     <div class="col-md-4">
                         <div class="card shadow-sm mb-4">
 
-                            <img src="{{ isset($product->image) ? asset('storage/' . $product->image) : asset('storage/no-image.jpg')}}" class="card-img-top" alt="{{ $product->name }}">
+                            <div style="height: 400px">
+                                <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top w-100 h-100" alt="{{ $product->name }}">
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <a href="{{ route('product.show', $product->slug) }}" class="text-decoration-none">
@@ -40,7 +42,7 @@
                 @endforeach
             </div>
             <div class="mt-4">
-                {{ $products->withQueryString()->links() }}
+                {{ $products->links() }}
             </div>
         @endif
     </div>

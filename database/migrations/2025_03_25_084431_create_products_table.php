@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug');
             $table->text('description');
             $table->decimal('price');
-            $table->decimal('stock');
+            $table->unsignedInteger('stock');
             $table->decimal('discount');
             $table->string('image')->nullable();
 
